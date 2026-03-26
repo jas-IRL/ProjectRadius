@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accelerating Frontline Readiness</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0B0B0F;--sf:#131317;--sf2:#1A1A1F;--sf3:#232329;--bd:rgba(255,255,255,0.07);--bdh:rgba(255,255,255,0.14);--tx:#FFFFFF;--tx2:#C4C4CC;--tx3:#6B6B76;--grn:#34D399;--gd:rgba(52,211,153,0.07);--gb:rgba(52,211,153,0.18);--yl:#FBBF24;--yd:rgba(251,191,36,0.07);--yb:rgba(251,191,36,0.18);--bl:#60A5FA;--bld:rgba(96,165,250,0.07);--blb:rgba(96,165,250,0.18);--hi:#A78BFA;--hd:rgba(167,139,250,0.07);--hb:rgba(167,139,250,0.18);--pk:#FF4D8D;--pkd:rgba(255,77,141,0.07);--pkb:rgba(255,77,141,0.18);--f:'Plus Jakarta Sans',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;overflow-y:scroll;height:100%}
+body{background:var(--bg);color:var(--tx);font-family:var(--f);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;height:100%}
+section{min-height:100vh;scroll-snap-align:start;padding:0;display:flex;align-items:flex-start;overflow-y:auto}
+.inner{max-width:960px;width:100%;margin:0 auto;padding:60px 48px 80px}
+.inner.center{display:flex;flex-direction:column;justify-content:center;min-height:100vh}
+.ey{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px}.ey.grn{color:var(--grn)}.ey.yl{color:var(--yl)}.ey.pk{color:var(--pk)}.ey.hi{color:var(--hi)}.ey.bl{color:var(--bl)}
+h1{font-size:clamp(36px,6vw,56px);font-weight:700;letter-spacing:-0.03em;line-height:1.08;margin-bottom:16px}h2{font-size:clamp(24px,4vw,38px);font-weight:700;letter-spacing:-0.02em;line-height:1.15;margin-bottom:14px}h3{font-size:20px;font-weight:700;margin:28px 0 12px}h1 mark,h2 mark,h3 mark{background:none;color:var(--grn)}
+.lead{font-size:16px;color:var(--tx2);max-width:620px;line-height:1.8;margin-bottom:36px}.meta{font-size:13px;color:var(--tx3)}
+.pillars{display:flex;gap:12px;margin:24px 0 0;flex-wrap:wrap}.pillar{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:0.06em;padding:6px 14px;border-radius:6px;border:1px solid}.pillar.grn{color:var(--grn);border-color:var(--gb);background:var(--gd)}.pillar.pk{color:var(--pk);border-color:var(--pkb);background:var(--pkd)}.pillar.hi{color:var(--hi);border-color:var(--hb);background:var(--hd)}
+.g{display:grid;gap:12px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}
+.c{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:22px 24px}.c h4{font-size:15px;font-weight:700;margin-bottom:8px}.c p{font-size:14px;color:var(--tx2);line-height:1.75}.c p b{color:var(--tx);font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:10px}.badge::before{content:'';width:5px;height:5px;border-radius:50%}.badge.grn{background:var(--gd);color:var(--grn);border:1px solid var(--gb)}.badge.grn::before{background:var(--grn)}.badge.pk{background:var(--pkd);color:var(--pk);border:1px solid var(--pkb)}.badge.pk::before{background:var(--pk)}.badge.yl{background:var(--yd);color:var(--yl);border:1px solid var(--yb)}.badge.yl::before{background:var(--yl)}.badge.hi{background:var(--hd);color:var(--hi);border:1px solid var(--hb)}.badge.hi::before{background:var(--hi)}.badge.bl{background:var(--bld);color:var(--bl);border:1px solid var(--blb)}.badge.bl::before{background:var(--bl)}.badge.n{background:rgba(255,255,255,0.03);color:var(--tx2);border:1px solid var(--bd)}.badge.n::before{background:var(--tx3)}
+.stats{display:grid;gap:12px}.stats3{grid-template-columns:1fr 1fr 1fr}.stat{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:24px 16px;text-align:center}.stat-v{font-size:36px;font-weight:700;letter-spacing:-0.03em;margin-bottom:4px}.stat-v.pk{color:var(--pk)}.stat-v.grn{color:var(--grn)}.stat-l{font-size:12px;color:var(--tx3);line-height:1.4}
+.co{border-radius:10px;padding:16px 20px;margin:20px 0;font-size:14px;line-height:1.75}.co.grn{background:var(--gd);border:1px solid var(--gb);color:var(--grn)}.co.hi{background:var(--hd);border:1px solid var(--hb);color:var(--hi)}.co.pk{background:var(--pkd);border:1px solid var(--pkb);color:var(--pk)}.co.yl{background:var(--yd);border:1px solid var(--yb);color:var(--yl)}.co b{font-weight:600}
+/* Circular system */
+.circ{position:relative;width:100%;max-width:520px;margin:28px auto;aspect-ratio:1/1}.circ-ring{position:absolute;top:50%;left:50%;width:68%;height:68%;border:2px dashed rgba(255,255,255,0.06);border-radius:50%;transform:translate(-50%,-50%)}.circ-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;font-family:var(--mono);font-size:10px;color:var(--tx3);letter-spacing:0.08em;text-transform:uppercase}
+.circ-node{position:absolute;width:150px;text-align:center;padding:14px 10px;background:var(--sf);border:2px solid var(--bd);border-radius:12px;font-size:11px;color:var(--tx2);line-height:1.5;transform:translate(-50%,-50%)}.circ-node b{display:block;font-size:13px;font-weight:700;color:var(--tx);margin-bottom:3px}.circ-node.top{top:5%;left:50%}.circ-node.right{top:50%;left:92%}.circ-node.bottom{top:90%;left:50%}.circ-node.left{top:50%;left:8%}.circ-node.yl{border-color:var(--yb);background:var(--yd)}.circ-node.yl b{color:var(--yl)}.circ-node.hi{border-color:var(--hb);background:var(--hd)}.circ-node.hi b{color:var(--hi)}.circ-node.grn{border-color:var(--gb);background:var(--gd)}.circ-node.grn b{color:var(--grn)}.circ-node.pk{border-color:var(--pkb);background:var(--pkd)}.circ-node.pk b{color:var(--pk)}
+.circ-arrow{position:absolute;color:var(--tx3);font-size:16px}.circ-arrow.tr{top:18%;left:78%}.circ-arrow.br{top:78%;left:78%;transform:rotate(90deg)}.circ-arrow.bl{top:78%;left:18%;transform:rotate(180deg)}.circ-arrow.tl{top:18%;left:18%;transform:rotate(270deg)}
+/* Process flow */
+.pf{margin:20px 0;background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:22px 26px}.pf-title{font-family:var(--mono);font-size:10px;color:var(--tx3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px}
+.pf-lane{display:grid;grid-template-columns:32px 1fr}.pf-line{display:flex;flex-direction:column;align-items:center;padding-top:8px}.pf-circ{width:10px;height:10px;border-radius:50%;flex-shrink:0}.pf-stem{flex:1;width:1px;background:var(--bd)}
+.pf-step{padding:6px 0 18px 16px;border-bottom:1px solid var(--bd)}.pf-step:last-child{border-bottom:none;padding-bottom:0}.pf-who{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:3px}.pf-what{font-size:14px;font-weight:700;margin-bottom:3px}.pf-how{font-size:13px;color:var(--tx2);line-height:1.7}
+.pf-note{margin-top:14px;padding:12px 16px;border:1px dashed var(--hb);border-radius:8px;font-size:12px;color:var(--hi);line-height:1.6}
+/* Branch */
+.branch{margin:12px 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.branch-lane{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:16px 14px}.branch-lane h5{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}.branch-lane h5 .bdot{width:6px;height:6px;border-radius:50%}.branch-lane p{font-size:12px;color:var(--tx2);line-height:1.65}.branch-lane p b{color:var(--tx);font-weight:600}.branch-lane .btime{font-family:var(--mono);font-size:10px;margin-top:8px;padding:4px 8px;border-radius:4px;display:inline-block}
+/* Agent */
+.agent{background:var(--sf);border:1px solid var(--bd);border-radius:16px;overflow:hidden;margin:20px 0;max-width:700px}
+.ag-chrome{background:linear-gradient(180deg,var(--sf2),var(--sf));padding:14px 20px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.ag-left{display:flex;align-items:center;gap:12px}.ag-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}.ag-icon.pk{background:var(--pkd);border:1px solid var(--pkb);color:var(--pk)}.ag-icon.yl{background:var(--yd);border:1px solid var(--yb);color:var(--yl)}
+.ag-meta .ag-name{font-size:13px;font-weight:700}.ag-meta .ag-desc{font-size:10px;color:var(--tx3)}
+.ag-pips{display:flex;gap:4px}.ag-pip{width:20px;height:3px;border-radius:2px;background:var(--sf3)}.ag-pip.done{background:var(--grn)}.ag-pip.on{background:var(--hi);opacity:0.6}
+.ag-tabs{display:flex;border-bottom:1px solid var(--bd)}.ag-tab{flex:1;padding:8px 0;text-align:center;font-size:11px;font-weight:500;color:var(--tx3);border-bottom:2px solid transparent;cursor:pointer;transition:all 0.15s}.ag-tab:hover{color:var(--tx2)}.ag-tab.on{color:var(--tx);border-bottom-color:var(--grn)}
+.ag-panel{display:none;padding:18px;max-height:560px;overflow-y:auto;background:var(--bg)}.ag-panel.on{display:flex;flex-direction:column;gap:10px}
+.ag-panel .af-item{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;font-size:12px;color:var(--tx2);line-height:1.7}.af-item b{color:var(--tx);font-weight:600}.af-item .af-label{font-family:var(--mono);font-size:9px;color:var(--tx3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px}
+.audit-row{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bd);font-size:12px;align-items:flex-start}.audit-row:last-child{border-bottom:none}.audit-time{font-family:var(--mono);font-size:10px;color:var(--tx3);min-width:60px;padding-top:2px}.audit-action{color:var(--tx2);line-height:1.6}.audit-action b{color:var(--tx);font-weight:600}.audit-status{font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:3px;margin-left:auto;flex-shrink:0}
+.ag-chat{padding:18px;max-height:560px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;background:var(--bg)}
+.m{max-width:92%;padding:14px 18px;border-radius:14px;font-size:13px;line-height:1.8}.m.bot{background:var(--sf);color:var(--tx2);align-self:flex-start;border-bottom-left-radius:4px;border:1px solid var(--bd)}.m.usr{align-self:flex-end;border-bottom-right-radius:4px}.m b{color:var(--tx);font-weight:600}
+.m .ml{font-family:var(--mono);font-size:9px;font-weight:500;color:var(--tx3);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.06em}
+.mb{background:var(--sf2);border-radius:10px;padding:14px 16px;margin-top:8px;font-size:13px;color:var(--tx2);line-height:1.8;border:1px solid var(--bd)}.mb b{color:var(--tx);font-weight:600}
+.artifact{background:var(--bg);border:1px solid var(--bd);border-radius:10px;margin-top:10px;overflow:hidden}.artifact-head{padding:10px 14px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px;background:var(--sf2)}.artifact-head .af-icon{font-size:12px}.artifact-head .af-name{font-size:11px;font-weight:600}.artifact-head .af-type{font-family:var(--mono);font-size:9px;color:var(--tx3);margin-left:auto}.artifact-body{padding:14px 16px;font-size:12px;color:var(--tx2);line-height:1.75}.artifact-body b{color:var(--tx);font-weight:600}
+.pill{font-family:var(--mono);display:inline-block;font-size:9px;padding:2px 7px;border-radius:3px;font-weight:500}.pill.grn{background:var(--gd);color:var(--grn);border:1px solid var(--gb)}.pill.yl{background:var(--yd);color:var(--yl);border:1px solid var(--yb)}.pill.hi{background:var(--hd);color:var(--hi);border:1px solid var(--hb)}.pill.pk{background:var(--pkd);color:var(--pk);border:1px solid var(--pkb)}.pill.bl{background:var(--bld);color:var(--bl);border:1px solid var(--blb)}
+.thinking{font-family:var(--mono);font-size:11px;color:var(--grn);padding:12px 16px;background:var(--gd);border:1px solid var(--gb);border-radius:10px;margin:8px 0;max-width:92%;align-self:flex-start;line-height:1.8;white-space:pre-wrap}.thinking::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--grn);margin-right:8px;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.approve{padding:12px 16px;border:1px solid var(--gb);border-radius:10px;background:var(--gd);font-size:12px;color:var(--grn);margin-top:8px;display:flex;align-items:center;gap:8px}.approve::before{content:'✓';font-weight:700;font-size:14px}
+.ag-bar{padding:14px 20px;border-top:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;background:var(--sf)}.ag-st{font-family:var(--mono);font-size:10px;color:var(--tx3)}.ag-btns{display:flex;gap:8px}
+.ag-btn{font-family:var(--f);font-size:12px;font-weight:600;padding:8px 22px;border-radius:8px;cursor:pointer;border:none;color:#000;transition:all 0.15s}.ag-btn.primary{background:var(--grn)}.ag-btn.primary:hover{opacity:0.85}.ag-btn:disabled{opacity:0.3;cursor:default}
+.ag-btn-ghost{font-family:var(--f);font-size:11px;font-weight:500;padding:7px 14px;border-radius:7px;cursor:default;border:1px solid var(--bd);background:transparent;color:var(--tx3)}
+/* Dropdown */
+.dd{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:12px}.dd-head{padding:18px 24px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none}.dd-head:hover{background:rgba(255,255,255,0.015)}.dd-title{font-size:16px;font-weight:700}.dd-sub{font-size:13px;color:var(--tx2);margin-top:3px}.dd-arrow{font-size:14px;color:var(--tx3);transition:transform 0.2s}.dd.open .dd-arrow{transform:rotate(90deg)}.dd-body{display:none;padding:0 24px 24px;border-top:1px solid var(--bd);padding-top:18px}.dd.open .dd-body{display:block}
+.req{display:flex;gap:12px;align-items:start;margin-bottom:12px}.req-n{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--grn);min-width:20px;padding-top:2px}.req-t{font-size:14px;color:var(--tx2);line-height:1.7}.req-t b{color:var(--tx);font-weight:600}
+/* Closer */
+.closer{text-align:center}.closer-label{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);margin-bottom:32px;animation:fi 1s ease}.closer-main{font-size:clamp(22px,3.5vw,30px);font-weight:700;line-height:1.4;max-width:580px;margin:0 auto 24px;animation:fi 1.5s ease}.closer-main mark{background:none;color:var(--grn)}.closer-sub{font-size:16px;color:var(--tx2);max-width:480px;margin:0 auto 32px;line-height:1.65;animation:fi 2s ease}.closer-anchor{background:var(--sf);border:2px solid var(--gb);border-radius:14px;padding:28px 36px;display:inline-block;animation:fi 2.5s ease}.closer-anchor p{font-size:20px;color:var(--grn);font-weight:700;margin:0}.closer-sig{font-size:12px;color:var(--tx3);margin-top:36px;animation:fi 3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:800px){.inner{padding:40px 24px 60px}.g2,.g3,.stats3,.branch{grid-template-columns:1fr}.circ{display:none}html{scroll-snap-type:none}}
+</style>
+</head>
+<body>
+
+<!-- 1: TITLE -->
+<section><div class="inner center">
+<div class="ey grn">Operational Readiness / Cash CX</div>
+<h1>Accelerating Frontline<br><mark>Readiness</mark></h1>
+<p style="font-size:16px;color:var(--tx2);margin-top:8px;max-width:520px">Advocate experience is the anchor to customer experience.</p>
+<div class="pillars"><span class="pillar grn">CS Domain Expertise</span><span class="pillar pk">Customer Experience</span><span class="pillar hi">AI-Driven Actions</span></div>
+<div class="meta" style="margin-top:20px">Jas / Operations Learning & Readiness</div>
+</div></section>
+
+<!-- 2: SYSTEM -->
+<section><div class="inner">
+<div class="ey hi">The system</div>
+<h2>How this works as a <mark>continuous loop.</mark></h2>
+<p class="lead">This model connects Operational Readiness to Quality's future state. What Quality builds makes our signals stronger. What we build closes gaps faster. Together they create a system where better data leads to better customer experience, continuously. This is CS domain expertise and AI-driven actions working as one.</p>
+<div class="circ"><div class="circ-ring"></div><div class="circ-center">Continuous<br>Loop</div>
+<div class="circ-node top yl"><b>Quality Signals</b>100% automated QA, improved rubric, performance data, partner feedback</div>
+<div class="circ-node right hi"><b>Intelligence Engines</b>Identify patterns, prioritize work, quantify impact</div>
+<div class="circ-node bottom grn"><b>Frontline Executes</b>Readiness Agents execute at scale, leaning into xfn partners</div>
+<div class="circ-node left pk"><b>Measure Outcomes</b>Did the gap close? Results feed back into signals</div>
+<div class="circ-arrow tr">&#8594;</div><div class="circ-arrow br">&#8595;</div><div class="circ-arrow bl">&#8592;</div><div class="circ-arrow tl">&#8593;</div></div>
+<div class="co hi"><b>AI-driven actions enable speed and scale. CS domain expertise owns the decisions and problem solving.</b> This system and Quality's automated review future state feed each other, driving better customer experience outcomes continuously.</div>
+</div></section>
+
+<!-- 3: PROBLEM -->
+<section><div class="inner">
+<div class="ey pk">The problem</div>
+<h2>We already know the gaps. The system can't close them <mark>fast enough.</mark></h2>
+<div class="stats stats3" style="margin-bottom:24px">
+<div class="stat"><div class="stat-v pk">98 days</div><div class="stat-l">Average L&D ticket resolution</div></div>
+<div class="stat"><div class="stat-v pk">21 days</div><div class="stat-l">Average content ticket resolution</div></div>
+<div class="stat"><div class="stat-v pk">285</div><div class="stat-l">Validated content issues via Project FixIt</div></div>
+</div>
+<div class="g g2">
+<div class="c"><div class="badge pk">Content</div><h4>Optimized for completeness, not usability. Too slow to keep up.</h4><p>Content assumes advocates have time and context they don't have. Our workforce is 100% outsourced, often working in a second language under real-time pressure. When a gap is identified, it enters a queue where urgent fixes wait alongside low-priority work. Every day this persists, customer experience suffers.</p></div>
+<div class="c"><div class="badge yl">L&D</div><h4>Too slow. Wrong modality.</h4><p>92% of delivery is instructor-led (49%) or self-paced (43%) regardless of whether the gap is knowledge, skill, or behavior. A knowledge refresh waits behind a complex build in the same intake queue. Top partner feedback from site visits: approaches are antiquated, there is no hands-on practice, and training is disconnected from the content advocates use. CS domain expertise is not driving the solution design.</p></div>
+</div>
+</div></section>
+
+<!-- 4: GOLD STANDARD -->
+<section><div class="inner">
+<div class="ey grn">Frameworks that work</div>
+<h2>Proven models that support <mark>this vision.</mark></h2>
+<p class="lead">These are operating principles proven at scale. They center on CS domain expertise driving content and training decisions, AI-driven actions enabling speed, and a direct line to customer experience outcomes.</p>
+<div class="g g2" style="margin-bottom:20px">
+<div class="c"><div class="badge grn">KCS v6 / Frontline-owned content</div><h4>Knowledge-Centered Service</h4><p>The industry standard for shifting content creation from centralized teams to the people doing the work. A central team governs and audits the system. Adopted by ServiceNow, Cisco, Oracle, Dell, and Salesforce. Directly tied to customer experience improvements through faster resolution and higher first-contact resolution.</p></div>
+<div class="c"><div class="badge grn">5 Moments of Need / Modality matching</div><h4>Right solution for the right problem</h4><p>Developed by Gottfredson and Mosher. Defines when formal training is needed versus just-in-time support. When cognitive load is high and error tolerance is low, the format must match the gap type. This is how CS domain expertise translates into the right learning modality at the right speed.</p></div>
+</div>
+<div class="stats stats3" style="margin-bottom:24px">
+<div class="stat"><div class="stat-v grn">50-60%</div><div class="stat-l">Faster time to resolution with frontline-owned content (KCS Consortium)</div></div>
+<div class="stat"><div class="stat-v grn">70%</div><div class="stat-l">Faster time to proficiency for new hires (KCS Consortium)</div></div>
+<div class="stat"><div class="stat-v grn">40%</div><div class="stat-l">Error reduction in compliance-sensitive transactions with simulation training</div></div>
+</div>
+<h3>We already do this in parts of <mark>our own business.</mark></h3>
+<div class="g g2">
+<div class="c"><div class="badge yl">Elder Abuse Investigations KA</div><h4>Frontline CX authored content end to end</h4><p>Frontline CX was responsible for writing, editing, and approving this Knowledge Article without the Content org. Proved frontline can own the content lifecycle when given ownership and accountability.</p></div>
+<div class="c"><div class="badge yl">Special Ops</div><h4>Runs L&D and content in-house for 2+ years</h4><p>Special Ops currently operates both content and training end to end without the L&D or Content org. They build materials, push to Block Academy, and address gaps at the speed of the business. This model has been running successfully for over two years and directly improves advocate and customer experience.</p></div>
+</div>
+</div></section>
+
+<!-- 5: REC 1 CONTENT -->
+<section><div class="inner">
+<div class="ey pk">Recommendation 1 / Content</div>
+<h2>Frontline owns content <mark>end to end.</mark></h2>
+<p class="lead">Frontline owns problem solving and content execution, applying CS domain expertise directly to the content advocates use every day.</p>
+
+<div class="pf">
+<div class="pf-title">Content process: who does what, when</div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--pk)"></div><div class="pf-stem"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--pk)">Signal detected</div><div class="pf-what">Frontline identifies a content gap</div><div class="pf-how">Sources: QA data, BPO feedback, operational insights, Project FixIt. Frontline scopes the issue and classifies urgency using CS domain expertise.</div></div></div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--hi)"></div><div class="pf-stem"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--hi)">Agent recommends a fix</div><div class="pf-what">Content Readiness Agent drafts within the FCS Writing Style Guide</div><div class="pf-how">AI-driven action: agent analyzes the issue, generates a recommended correction with reasoning, and applies readability, structure, and terminology standards. The agent recommends. It does not decide.</div></div></div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--grn)"></div><div class="pf-stem"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--grn)">Frontline PPA reviews</div><div class="pf-what">Human accepts, rejects, or modifies the recommendation</div><div class="pf-how">A Frontline PPA reviews the agent's output and makes the final call. After approval, the agent validates the final version against guidelines and requirements.</div></div></div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--yl)"></div><div class="pf-stem"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--yl)">Compliance (as needed)</div><div class="pf-what">Regulated content gets legal/compliance review</div><div class="pf-how">If the content touches regulatory language, compliance reviews before publish. Never bypassed.</div></div></div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--bl)"></div><div class="pf-stem"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--bl)">Frontline publishes</div><div class="pf-what">Update goes live and syncs to advocate-facing tools</div><div class="pf-how">Published to the knowledge base via Contentful/Bloomfire. Updates automatically sync to tools like Copilot through the content ingestion pipeline. Change communication pushed via CCO NewsFeed.</div></div></div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--tx3)"></div><div class="pf-stem" style="background:transparent"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--tx3)">Measure impact</div><div class="pf-what">Track whether the gap closed</div><div class="pf-how">Monitor Project FixIt for repeat flags, QA sample relevant contacts, compare pre/post defect rates. Results feed back into quality signals. Better content means better customer experience.</div></div></div>
+<div class="pf-note"><b>Content automated governance runs separately on a cadence:</b> reviews published content for standard drift, structural issues, and compliance flags. Not in the publish pipeline. A system-level quality function maintained by Content.</div>
+</div>
+
+<div class="g g2" style="margin-top:20px">
+<div class="c"><div class="badge grn">What frontline owns</div><h4>Problem solving and content execution</h4><p>Frontline identifies gaps, scopes issues, drafts corrections with the Content Readiness Agent, reviews outputs, publishes to the knowledge base, and owns change communications.
+
+This includes: using QA data and Project FixIt to identify gaps, drafting within the FCS Writing Style Guide, managing peer review through the agent, publishing via Contentful/Bloomfire, and pushing updates via CCO NewsFeed.</p></div>
+<div class="c"><div class="badge n">What Content owns</div><h4>Automated governance and systemic oversight</h4><p>Content builds and maintains an automated governance layer that validates published content against defined standards on a cadence (monthly or biweekly). This runs separately from the creation-to-publish pipeline.
+
+Content does not create, prioritize, or rewrite. They design the automated control system, perform cadence-based reviews to catch drift, and provide systemic insight across the full content base.</p></div>
+</div>
+</div></section>
+
+<!-- 6: CONTENT AGENT -->
+<section><div class="inner">
+<div class="ey pk">Use case / Content Readiness Agent</div>
+<h2>Denylisted article: <mark>conflicting workflow.</mark></h2>
+<p style="font-size:14px;color:var(--tx2);max-width:640px;margin-bottom:8px">Source: Project FixIt. KA Risk-Denylisted Customers, Step 2 has opposite instructions. Signal identified. Watch the Content Readiness Agent work through the full playbook: discovery, analysis, style guide application, artifact generation, validation, deployment, and impact measurement.</p>
+<div class="agent">
+<div class="ag-chrome"><div class="ag-left"><div class="ag-icon pk">C</div><div class="ag-meta"><div class="ag-name">Content Readiness Agent</div><div class="ag-desc">FCS Content Playbook v1.0 / Style Guide Applied</div></div></div><div class="ag-pips" id="cpips"></div></div>
+<div class="ag-tabs" id="ctabs" onclick="switchTab('c',event)"><div class="ag-tab on" data-tab="chat">Conversation</div><div class="ag-tab" data-tab="artifacts">Generated Artifacts</div><div class="ag-tab" data-tab="audit">Audit Log</div></div>
+<div class="ag-chat ag-panel on" id="cc" data-panel="chat"><div class="m bot"><div class="ml">Content Readiness Agent</div>I'm ready to help you resolve a content issue. Walk me through what you're seeing: the article name, the specific section, and the problem advocates are experiencing. I'll scope it, analyze the root cause, and recommend a fix within the FCS Writing Style Guide.</div></div>
+<div class="ag-panel" id="c-artifacts" data-panel="artifacts"><div class="af-item" style="text-align:center;color:var(--tx3);padding:40px 16px"><em>Artifacts will appear here as the agent generates them. Click Continue in the Conversation tab to progress.</em></div></div>
+<div class="ag-panel" id="c-audit" data-panel="audit"><div class="af-item" style="text-align:center;color:var(--tx3);padding:40px 16px"><em>Audit log will populate as the agent processes each step.</em></div></div>
+<div class="ag-bar"><div class="ag-st" id="cs">Step 1 of 8</div><div class="ag-btns"><span class="ag-btn-ghost">&#9998; Modify</span><span class="ag-btn-ghost">&#10005; Reject</span><button class="ag-btn primary" id="cb" onclick="rc()">Continue</button></div></div>
+</div>
+</div></section>
+
+<!-- 7: REC 2 L&D -->
+<section><div class="inner">
+<div class="ey yl">Recommendation 2 / L&D</div>
+<h2>Route every gap to the right modality <mark>at the right speed.</mark></h2>
+<p class="lead">We are shifting to a model where CS domain expertise identifies the gap type, AI-driven actions match it to the right learning modality, and delivery happens at the speed each demands.</p>
+
+<h3>Three lanes, matched to <mark>gap type</mark></h3>
+<div class="g g3" style="margin-bottom:20px">
+<div class="c"><div class="badge grn">Reinforce</div><h4>Knowledge gaps</h4><p><b>Advocates don't know, don't remember, or can't find the answer fast enough.</b>
+
+Quick refreshers, job aids, microlearning, or custom materials built by frontline from the co-built library or generated using AI tools like Goose. Frontline builds. L&D publishes to Block Academy, advocates enrolled.</p></div>
+<div class="c"><div class="badge yl">Practice</div><h4>Skill gaps</h4><p><b>Advocates understand the concept but can't execute consistently under real-time pressure.</b>
+
+Simulation scenarios, role-plays, and applied exercises built by L&D using tools across the learning tech stack, including in-house builds and platforms like Reflex.ai. Frontline defines requirements. This is a performance issue that partners own closing.</p></div>
+<div class="c"><div class="badge pk">Build</div><h4>Complex or new</h4><p><b>New products, policy changes, sensitive scenarios, or entirely new capabilities that don't have a foundation to build on.</b>
+
+Structured learning and facilitated sessions. L&D designs, builds, and delivers. This is where their instructional design expertise is irreplaceable.</p></div>
+</div>
+
+<div class="pf">
+<div class="pf-title">L&D process: who does what, when</div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--pk)"></div><div class="pf-stem"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--pk)">Signal detected</div><div class="pf-what">Performance gap identified</div><div class="pf-how">Sources: QA data, performance metrics, partner feedback, intelligence engine outputs. Frontline classifies gap type using CS domain expertise.</div></div></div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--hi)"></div><div class="pf-stem"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--hi)">Agent recommends</div><div class="pf-what">Modality pairing, solutions, and next steps</div><div class="pf-how">Training Readiness Agent helps frontline articulate the issue, recommends a modality (Reinforce, Practice, or Build), and pulls relevant artifacts from the co-built library. Frontline PPA reviews, accepts, or rejects.</div></div></div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--grn)"></div><div class="pf-stem"></div></div>
+<div class="pf-step" style="padding-bottom:14px">
+<div class="pf-who" style="color:var(--grn)">Execute by modality</div>
+<div class="pf-what">Three paths based on gap type</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px">
+<div style="background:var(--bg);border:1px solid var(--gb);border-radius:8px;padding:12px 12px"><div style="font-size:12px;font-weight:700;color:var(--grn);margin-bottom:4px;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:var(--grn);display:inline-block"></span>Reinforce</div><p style="font-size:11px;color:var(--tx2);line-height:1.6;margin:0">Frontline builds materials from library or AI tools. L&D publishes to <b style="color:var(--tx)">Block Academy.</b> Advocates enrolled.</p><div style="font-family:var(--mono);font-size:9px;margin-top:6px;padding:3px 7px;border-radius:3px;display:inline-block;background:var(--gd);color:var(--grn);border:1px solid var(--gb)">Hours to days</div></div>
+<div style="background:var(--bg);border:1px solid var(--yb);border-radius:8px;padding:12px 12px"><div style="font-size:12px;font-weight:700;color:var(--yl);margin-bottom:4px;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:var(--yl);display:inline-block"></span>Practice</div><p style="font-size:11px;color:var(--tx2);line-height:1.6;margin:0">Frontline defines requirements. <b style="color:var(--tx)">L&D builds</b> simulations and applied exercises. Partner delivers, accountable for proficiency.</p><div style="font-family:var(--mono);font-size:9px;margin-top:6px;padding:3px 7px;border-radius:3px;display:inline-block;background:var(--yd);color:var(--yl);border:1px solid var(--yb)">7-10 days</div></div>
+<div style="background:var(--bg);border:1px solid var(--pkb);border-radius:8px;padding:12px 12px"><div style="font-size:12px;font-weight:700;color:var(--pk);margin-bottom:4px;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:var(--pk);display:inline-block"></span>Build</div><p style="font-size:11px;color:var(--tx2);line-height:1.6;margin:0">L&D designs, builds, and facilitates. Frontline provides CS domain expertise and requirements.</p></div>
+</div>
+</div></div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--bl)"></div><div class="pf-stem"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--bl)">Deploy</div><div class="pf-what">Solution reaches advocates</div><div class="pf-how">Reinforcement materials uploaded to Block Academy, advocates enrolled. Practice simulations delivered by L&D, partner ensures proficiency. Complex training facilitated by L&D. Change pacing monitored.</div></div></div>
+<div class="pf-lane"><div class="pf-line"><div class="pf-circ" style="background:var(--tx3)"></div><div class="pf-stem" style="background:transparent"></div></div><div class="pf-step"><div class="pf-who" style="color:var(--tx3)">Measure impact</div><div class="pf-what">Did the gap close?</div><div class="pf-how">QA sampling, quiz scores, pre/post accuracy. If reinforcement didn't move the needle, escalate to practice. Partner performance tracked on scorecards. Results feed back into quality signals and customer experience metrics.</div></div></div>
+<div class="pf-note"><b>L&D standards layer runs continuously:</b> co-built library maintained, frameworks govern modality definitions, complex builds get full design. <b>Change pacing governance:</b> active change volume monitored to prevent cognitive overload.</div>
+</div>
+
+<h3>Who owns <mark>what</mark></h3>
+<p style="font-size:14px;color:var(--tx2);margin-bottom:16px">Frontline brings CS domain expertise. L&D brings design expertise. Partners are accountable for advocate performance. Together, this drives customer experience.</p>
+<div class="g g3">
+<div class="c"><div class="badge grn">Frontline</div><h4>Problem identification and standards</h4><p>Identifies gaps using CS domain expertise. Defines scenarios from real interaction data. Triggers solutions through the Training Readiness Agent. Defines required learning outcomes and minimum viable products for each gap type.</p></div>
+<div class="c"><div class="badge hi">L&D</div><h4>Design expertise and library</h4><p>Co-builds the artifact library with Frontline CX. Sets learning standards and frameworks. Designs simulations and practice exercises from frontline specs. Owns complex facilitation. Publishes reinforcement materials to Block Academy.</p></div>
+<div class="c"><div class="badge yl">Partners</div><h4>Performance accountability</h4><p>Ensures advocates meet standards. Closes skill gaps operationally. Delivers using their own tools as enablers, not drivers. Skill gaps are ultimately performance management that impacts customer experience.</p></div>
+</div>
+</div></section>
+
+<!-- 8: TRAINING AGENT -->
+<section><div class="inner">
+<div class="ey yl">Use case / Training Readiness Agent</div>
+<h2>Complaints mistagging. <mark>Compliance risk.</mark></h2>
+<p style="font-size:14px;color:var(--tx2);max-width:640px;margin-bottom:8px">Multiple sites. Wrong tags affect regulatory reporting. Current model: 98-day average resolution. Watch the Training Readiness Agent work through the full playbook: intake, diagnosis, modality recommendation, artifact assembly from the co-built library, deployment planning through Block Academy, and impact measurement.</p>
+
+<div class="agent">
+<div class="ag-chrome"><div class="ag-left"><div class="ag-icon yl">T</div><div class="ag-meta"><div class="ag-name">Training Readiness Agent</div><div class="ag-desc">FCS L&D Playbook v1.0 / Modality Framework Applied</div></div></div><div class="ag-pips" id="lpips"></div></div>
+<div class="ag-tabs" id="ltabs" onclick="switchTab('l',event)"><div class="ag-tab on" data-tab="chat">Conversation</div><div class="ag-tab" data-tab="artifacts">Generated Artifacts</div><div class="ag-tab" data-tab="deploy">Deployment Plan</div></div>
+<div class="ag-chat ag-panel on" id="lc" data-panel="chat"><div class="m bot"><div class="ml">Training Readiness Agent</div>I'm ready to help you scope a performance gap and recommend the right intervention. Walk me through what you're seeing on the floor: the behavior, the scope, the impact. I'll analyze the gap type, recommend a modality pairing, and help you build the solution from our co-built library.</div></div>
+<div class="ag-panel" id="l-artifacts" data-panel="artifacts"><div class="af-item" style="text-align:center;color:var(--tx3);padding:40px 16px"><em>Artifacts will appear here as the agent generates them. Click Continue in the Conversation tab to progress.</em></div></div>
+<div class="ag-panel" id="l-deploy" data-panel="deploy"><div class="af-item" style="text-align:center;color:var(--tx3);padding:40px 16px"><em>Deployment plan will populate as the agent finalizes recommendations.</em></div></div>
+<div class="ag-bar"><div class="ag-st" id="ls">Step 1 of 8</div><div class="ag-btns"><span class="ag-btn-ghost">&#9998; Modify</span><span class="ag-btn-ghost">&#10005; Reject</span><button class="ag-btn primary" id="lb" onclick="rl()" style="background:var(--yl);color:#000">Continue</button></div></div>
+</div>
+</div></section>
+
+<!-- 9: FUNCTIONAL EXPERTISE -->
+<section><div class="inner">
+<div class="ey bl">Functional expertise in this model</div>
+<h2>How Content and L&D <mark>work differently.</mark></h2>
+<p class="lead">Both teams bring expertise the system depends on. This model redeploys that expertise toward system design, governance, and acceleration, where it creates the most value for customer experience, rather than day-to-day production.</p>
+<div class="g g2">
+<div class="c"><div class="badge pk">Content's superpower</div><h4>Governance system design</h4><p>Content builds and maintains the automated governance layer. They perform reviews that identify systemic patterns across the full content base. They improve standards and the system over time. Their editorial expertise makes the governance layer smarter and more precise.
+
+Instead of spending capacity on individual articles and rewrites, Content's expertise scales through the system they build. One well-designed governance layer covers every publish. Their time goes to systemic insight, not production.</p></div>
+<div class="c"><div class="badge yl">L&D's superpower</div><h4>Learning architecture</h4><p>L&D co-builds the artifact library with Frontline CX, setting learning standards and frameworks that define quality. They design practice exercises and simulations from frontline specs. They own complex facilitation. Their instructional design expertise powers the modality framework and the library.
+
+Instead of processing a queue of mixed-complexity requests, L&D's capacity goes to high-impact work: co-building the library that powers reinforcement deployments, designing practice scenarios that address real skill gaps, and facilitating training only they can deliver.</p></div>
+</div>
+</div></section>
+
+<!-- 10: THE ASK -->
+<section><div class="inner">
+<div class="ey grn">The ask</div>
+<h2>What we're recommending. <mark>What it takes to execute.</mark></h2>
+<div class="dd open" onclick="tog(this)">
+<div class="dd-head"><div><div class="dd-title" style="color:var(--pk)">Recommendation 1: Content Execution Model</div><div class="dd-sub">Frontline owns end-to-end content execution. Content builds automated governance. Compliance reviews as needed.</div></div><div class="dd-arrow">&#9654;</div></div>
+<div class="dd-body">
+<div class="req"><div class="req-n">1</div><div class="req-t"><b>Frontline Content Framework.</b> Comprehensive operating playbook that includes: FCS Writing Style Guide, content strategy, change management approach, quality standards, governance model, and escalation criteria. The foundation for how CS domain expertise translates into content that drives customer experience.</div></div>
+<div class="req"><div class="req-n">2</div><div class="req-t"><b>Content Readiness Agent.</b> AI-driven action tool for discovery, analysis, recommendation, style guide application, artifact generation, and validation. PPA accepts/rejects/modifies all outputs.</div></div>
+<div class="req"><div class="req-n">3</div><div class="req-t"><b>Automated governance layer.</b> Content designs and builds an AI-driven system that reviews published content on a cadence for standard drift, structural issues, and compliance flags.</div></div>
+<div class="req"><div class="req-n">4</div><div class="req-t"><b>Technical enablement.</b> Frontline access and training on Contentful, Bloomfire, and related publishing tools.</div></div>
+<div class="req"><div class="req-n">5</div><div class="req-t"><b>CCO NewsFeed self-serve approval.</b> CCO NewsFeed is currently limited to approved self-serve teams (WFO and L&D). Frontline CX needs approval from Content Operations to self-serve through NewsFeed for change communications.</div></div>
+<div class="req"><div class="req-n">6</div><div class="req-t"><b>Compliance and legal review process.</b> Clear criteria for what triggers compliance review and a defined turnaround so regulated content doesn't stall.</div></div>
+<div class="req"><div class="req-n">7</div><div class="req-t"><b>QA signal integration.</b> Connection to Quality's automated review future state so content gaps surface faster and customer experience outcomes are measured precisely.</div></div>
+</div></div>
+<div class="dd" onclick="tog(this)">
+<div class="dd-head"><div><div class="dd-title" style="color:var(--yl)">Recommendation 2: Training Execution Model</div><div class="dd-sub">Modality-based routing: Reinforce, Practice, Build. Partners close skill gaps. Measured against CX outcomes.</div></div><div class="dd-arrow">&#9654;</div></div>
+<div class="dd-body">
+<div class="req"><div class="req-n">1</div><div class="req-t"><b>Frontline Training Framework.</b> Comprehensive operating model that includes: modality routing criteria (Reinforce, Practice, Build), learning outcome standards by gap type, deployment standards by modality, co-built artifact library governance, and change pacing guidelines. How CS domain expertise translates into learning that drives customer experience.</div></div>
+<div class="req"><div class="req-n">2</div><div class="req-t"><b>Training Readiness Agent.</b> AI-driven action tool for intake, diagnosis, modality recommendation, artifact assembly from the co-built library, and deployment planning. PPA reviews all recommendations.</div></div>
+<div class="req"><div class="req-n">3</div><div class="req-t"><b>Co-built learning artifact library.</b> Joint effort between L&D and Frontline CX. Templates, design patterns, job aids, microlearning, scenario frameworks. Frontline builds reinforcement materials from library and AI tools. L&D governs quality and publishes to Block Academy.</div></div>
+<div class="req"><div class="req-n">4</div><div class="req-t"><b>Partner performance accountability.</b> Skill gaps treated as performance management. Metrics tied to gap closure on partner scorecards, not just training completion. Directly tied to customer experience outcomes.</div></div>
+<div class="req"><div class="req-n">5</div><div class="req-t"><b>QA signal integration.</b> Connection to Quality's automated review future state so performance signals feed directly into the modality routing system.</div></div>
+
+</div></div>
+</div></div>
+</div></section>
+
+<!-- 11: EXPECTED OUTCOMES -->
+<section><div class="inner center">
+<div class="ey grn">Expected outcomes</div>
+<h2>In 90 days, we know this is working <mark>because:</mark></h2>
+<div style="max-width:640px;margin-top:32px">
+<p style="font-size:16px;line-height:1.9;margin-bottom:24px"><b>The frameworks and agents are live and executing real work.</b><br><span style="color:var(--tx2)">This didn't exist before. Now it does.</span></p>
+<p style="font-size:16px;line-height:1.9;margin-bottom:24px"><b>Frontline is closing content and training gaps in hours and days that used to take weeks and months.</b><br><span style="color:var(--tx2)">Advocates get what they need faster, and customers feel it.</span></p>
+<p style="font-size:16px;line-height:1.9;margin-bottom:24px"><b>Advocates are getting the right solution for the right problem, not the same format for every gap.</b><br><span style="color:var(--tx2)">Better equipped advocates deliver better customer experience.</span></p>
+<p style="font-size:16px;line-height:1.9"><b>We're doing it with current capacity, AI-driven actions, and CS domain expertise, without scaling headcount to scale output.</b><br><span style="color:var(--tx2)">The work is faster, through a customer experience lens, with a fraction of the resources.</span></p>
+</div>
+</div></section>
+
+<!-- 12: CLOSE -->
+<section><div class="inner center">
+<div class="closer">
+<p style="font-size:clamp(36px,7vw,64px);font-weight:700;letter-spacing:-0.03em;margin-bottom:16px;animation:fi 1s ease">That's All, Folks!</p>
+<p style="font-size:14px;color:var(--tx3);margin-bottom:32px;animation:fi 1.5s ease">Drop your favorite Bugs Bunny gif here. You've earned it.</p>
+<div style="width:200px;height:200px;border:2px dashed var(--bd);border-radius:16px;margin:0 auto 32px;display:flex;align-items:center;justify-content:center;animation:fi 2s ease"><span style="font-size:48px">🐰</span></div>
+<div class="closer-anchor" style="animation:fi 2.5s ease"><p>Advocate experience is the anchor to customer experience.</p></div>
+<div class="closer-sig" style="animation:fi 3s ease">Jas / Operations Learning & Readiness / Cash Frontline CS</div>
+</div>
+</div></section>
+
+</body>
+<script>
+function tog(el){el.classList.toggle('open')}
+
+// Tab switching
+function switchTab(prefix,e){
+const tab=e.target.closest('.ag-tab');if(!tab)return;
+const tabBar=tab.parentElement;const agent=tabBar.closest('.agent');
+const panelName=tab.dataset.tab;
+tabBar.querySelectorAll('.ag-tab').forEach(t=>t.classList.remove('on'));
+tab.classList.add('on');
+agent.querySelectorAll('.ag-panel').forEach(p=>{p.classList.remove('on');if(p.dataset.panel===panelName)p.classList.add('on')});
+}
+
+// Content agent artifact/audit data
+const cArtifacts=[
+null,null,null,null,
+{name:"KA Risk-Denylisted Customers - Step 2 (Corrected)",type:"KNOWLEDGE ARTICLE",icon:"📄",body:"Decision tree format. 4 branches. Grade 7.1 readability. ESL-safe. Contentful template compatible. Peer review: agent-validated against FCS Writing Style Guide v1.0."},
+{name:"FCS Validation Report",type:"VALIDATION REPORT",icon:"✅",body:"6/6 checks passed: Structure (decision tree) ✓ | Readability (7.1) ✓ | Compliance flags (none) ✓ | Terminology (FCS glossary) ✓ | ESL readability ✓ | Contentful template ✓"},
+{name:"Deployment: KA Risk-Denylisted Step 2 Fix",type:"DEPLOYMENT PLAN",icon:"🚀",body:"Publish to Contentful → auto-sync to Copilot → CCO NewsFeed change comm → Week 1-4 impact measurement via FixIt + QA sampling"}
+];
+const cAudit=[
+{time:"00:00",action:"Session initiated. Agent loaded FCS Content Playbook v1.0.",status:"grn",label:"READY"},
+{time:"00:12",action:"User submitted content issue: KA Risk-Denylisted Customers, Step 2.",status:"bl",label:"INPUT"},
+{time:"00:14",action:"Agent queried FCS Content Database. Article loaded (4 sections, 12 steps).",status:"grn",label:"QUERY"},
+{time:"00:22",action:"User provided scope: all sites, 7+ months, FixIt + partner reviews.",status:"bl",label:"INPUT"},
+{time:"00:25",action:"Root cause analysis complete. Classification: WORKFLOW CONFLICT / HIGH PRIORITY.",status:"yl",label:"ANALYSIS"},
+{time:"00:25",action:"Regulatory review: NOT REQUIRED (operational workflow, no FINRA triggers).",status:"grn",label:"CLEARED"},
+{time:"00:38",action:"FCS Writing Style Guide v1.0 applied. 6 standards checked. All passed.",status:"grn",label:"VALIDATED"},
+{time:"00:52",action:"Corrected article generated. 4 branches, Grade 7.1, ESL-safe.",status:"hi",label:"ARTIFACT"},
+{time:"01:05",action:"PPA accepted recommendation.",status:"grn",label:"APPROVED"},
+{time:"01:08",action:"Final validation: 6/6 checks passed.",status:"grn",label:"VALIDATED"},
+{time:"01:15",action:"Deployment plan generated. NewsFeed comm drafted. Measurement set.",status:"hi",label:"ARTIFACT"},
+];
+
+// Training agent artifact/audit data
+const tArtifacts=[
+null,null,null,
+{name:"Complaints Primary Issue Tag Guide",type:"QUICK REFERENCE CARD",icon:"📋",body:"Top 8 primary issue tags. 3 most confused pairs with visual differentiators: Service vs Product, Billing vs Unauthorized, Feedback vs Complaint. Grade 7 readability. Decision logic included."},
+null,
+{name:"Complaints Tagging: Get It Right",type:"MICROLEARNING MODULE / 3 MIN",icon:"🎓",body:"6 slides: compliance impact intro → 3 real mistagging examples → confusion pair mnemonics → decision prompt. Built from Visual Walkthrough Shell template."},
+{name:"Complaints Tagging Deployment",type:"DEPLOYMENT PLAN",icon:"🚀",body:"Reinforcement pack → Block Academy (deploy now) | Practice simulation → L&D builds from frontline req (7-10 days) | Change pacing: 3/4 threshold, CLEAR | Week 1-4 measurement via QA sampling + Block Academy scores"}
+];
+const tAudit=[
+{time:"00:00",action:"Session initiated. Agent loaded FCS L&D Playbook v1.0.",status:"grn",label:"READY"},
+{time:"00:10",action:"User submitted performance gap: complaints mistagging across multiple sites.",status:"bl",label:"INPUT"},
+{time:"00:12",action:"Compliance implications flagged. CFPB reporting accuracy at risk.",status:"yl",label:"FLAG"},
+{time:"00:28",action:"User provided scope: nuanced categories, all tenure levels, onboarding only.",status:"bl",label:"INPUT"},
+{time:"00:32",action:"Gap classification: KNOWLEDGE + SKILL HYBRID. Modality: Reinforce + Practice.",status:"yl",label:"ANALYSIS"},
+{time:"00:33",action:"Change pacing check: 2 active deployments. Threshold: 4. Status: CLEAR.",status:"grn",label:"CLEARED"},
+{time:"00:45",action:"PPA accepted modality pairing.",status:"grn",label:"APPROVED"},
+{time:"00:48",action:"Co-built library queried. 3 templates selected for reinforcement pack.",status:"grn",label:"QUERY"},
+{time:"01:02",action:"Quick Reference Card generated from Complaints Taxonomy v2 template.",status:"hi",label:"ARTIFACT"},
+{time:"01:15",action:"Microlearning + Quiz generated from library templates.",status:"hi",label:"ARTIFACT"},
+{time:"01:18",action:"PPA accepted all artifacts.",status:"grn",label:"APPROVED"},
+{time:"01:25",action:"Deployment plan generated. Block Academy enrollment + practice simulation spec + measurement.",status:"hi",label:"ARTIFACT"},
+];
+
+function updateArtifactPanel(prefix,stepIdx){
+const panelId=prefix+'-artifacts';const panel=document.getElementById(panelId);
+const data=prefix==='c'?cArtifacts:tArtifacts;
+if(stepIdx>0&&data[stepIdx-1]){
+const existing=panel.querySelector('em');if(existing)existing.closest('.af-item').remove();
+const d=data[stepIdx-1];
+const item=document.createElement('div');item.className='af-item';
+item.innerHTML='<div class="af-label">'+d.icon+' '+d.type+'</div><b>'+d.name+'</b><br><br>'+d.body;
+panel.appendChild(item);
+}}
+
+function updateAuditPanel(prefix,stepIdx){
+const auditId=prefix+'-audit';const deployId=prefix+'-deploy';
+const panel=document.getElementById(auditId)||document.getElementById(deployId);
+if(!panel)return;
+const data=prefix==='c'?cAudit:tAudit;
+const existing=panel.querySelector('em');if(existing)existing.closest('.af-item').remove();
+panel.innerHTML='';
+const cutoff=prefix==='c'?[0,1,3,5,7,8,9,10][stepIdx]||0:[0,1,3,5,7,8,10,11][stepIdx]||0;
+for(let i=0;i<=Math.min(cutoff,data.length-1);i++){
+const d=data[i];const row=document.createElement('div');row.className='audit-row';
+const colors={grn:'background:var(--gd);color:var(--grn);border:1px solid var(--gb)',yl:'background:var(--yd);color:var(--yl);border:1px solid var(--yb)',bl:'background:var(--bld);color:var(--bl);border:1px solid var(--blb)',hi:'background:var(--hd);color:var(--hi);border:1px solid var(--hb)'};
+row.innerHTML='<div class="audit-time">'+d.time+'</div><div class="audit-action">'+d.action+'</div><div class="audit-status" style="'+colors[d.status]+'">'+d.label+'</div>';
+panel.appendChild(row);
+}}
+function mkPips(id,n){const el=document.getElementById(id);for(let i=0;i<n;i++){const p=document.createElement('div');p.className='ag-pip'+(i===0?' on':'');el.appendChild(p)}}
+mkPips('cpips',8);mkPips('lpips',8);
+function upPips(id,s){document.getElementById(id).querySelectorAll('.ag-pip').forEach((p,i)=>{p.className='ag-pip';if(i<s)p.classList.add('done');else if(i===s)p.classList.add('on')})}
+
+function addThinking(chat,lines,cb){
+const t=document.createElement('div');t.className='thinking';t.innerHTML='';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;
+let li=0,ci=0;
+function typeLine(){if(li>=lines.length){setTimeout(cb,600);return}
+if(ci===0&&li>0)t.innerHTML+='<br>';
+if(ci<lines[li].length){t.innerHTML+=lines[li][ci];ci++;chat.scrollTop=chat.scrollHeight;setTimeout(typeLine,8+Math.random()*12)}
+else{li++;ci=0;setTimeout(typeLine,200)}}typeLine()}
+
+// CONTENT AGENT - no tier references, frontline owns everything
+const cSteps=[
+{usr:"KA Risk-Denylisted Customers, Step 2. Says don't file another appeal if Completed and still denylisted. But a sub-bullet links to guidance that walks advocates back into filing one. Opposite instructions in the same step.",
+think:["Querying FCS Content Database for KA Risk-Denylisted Customers...","Loading article structure: 4 sections, 12 steps, 3 sub-procedures...","Isolating Step 2: Appeal Workflow decision point...","Cross-referencing linked article: \"Denylist Appeal was Rejected\"...","Conflict detected: primary instruction contradicts linked sub-procedure...","Checking article metadata: last updated 2025-08-14, no FixIt flags resolved...","Assessing regulatory classification: operational workflow, no FINRA triggers..."],
+bot:"<div class='ml'>Discovery / Scoping</div>I've loaded the article and identified the conflict. Before I recommend a fix, I need to understand the operational impact:<br><br><b>1.</b> How are advocates splitting on this? Majority following one path, or roughly even?<br><b>2.</b> All sites affected or isolated to specific partners/locations?<br><b>3.</b> How long has this been active? The article was last updated August 2025.<br><b>4.</b> Have you seen this surface in QA defects, or only through FixIt/partner feedback?"},
+{usr:"Most follow the first instruction and don't file. Some follow the link and file. Across all sites, all partners. Been there since at least August. Came through FixIt and we've heard it in partner operational reviews.",
+think:["Classifying issue severity...","Impact scope: ALL sites, ALL partners, 7+ months active...","Calculating estimated contact volume: denylisted cases = ~2,400/month...","Cross-referencing QA data: 3 related defects flagged in Q4 2025...","Determining classification: operational workflow, no regulatory language...","Regulatory review required: NO","Classification complete: WORKFLOW CONFLICT / HIGH PRIORITY / FAST TRACK ELIGIBLE"],
+bot:"<div class='ml'>Root Cause Analysis</div><div class='mb'><b>Article:</b> KA Risk-Denylisted Customers<br><b>Section:</b> Step 2, Appeal Workflow<br><b>Classification:</b> <span class='pill pk'>WORKFLOW CONFLICT</span> <span class='pill grn'>FAST TRACK</span><br><b>Priority:</b> High (all sites, 7+ months, ~2,400 contacts/month affected)<br><b>Regulatory review:</b> Not required (operational workflow, no FINRA triggers)<br><br><b>Root cause:</b> The primary instruction in Step 2 directs advocates not to file another appeal when status = Completed and account remains denylisted. However, a sub-bullet in the same step links to the \"Denylist Appeal was Rejected\" procedure, which routes advocates through the standard appeal workflow, directly contradicting the primary instruction.<br><br><b>Why this happened:</b> The linked sub-procedure was written for a different entry point and was never reconciled when the appeal workflow was updated in August 2025.<br><br><b>Risk:</b> Inconsistent customer experience. Potential compliance exposure. ~2,400 contacts/month navigating conflicting guidance.</div><b>Recommendation:</b> Remove the contradictory link, restructure as a decision tree, and simplify to Grade 7 per the FCS Writing Style Guide. I'll generate the corrected article for your review."},
+{think:["Loading FCS Writing Style Guide v1.0...","Applying readability target: Grade 7 (current article: Grade 10.4)...","Converting structure: paragraph with embedded link → if/then decision tree...","Checking action orientation: each branch must end with a clear next step...","Applying scannability standard: find and act in ≤30 seconds...","Running ESL readability check: scanning for idioms... none found...","Checking for passive voice... 3 instances found, converting to active...","Checking for ambiguous pronouns... 1 found, clarifying referent...","Identifying missing edge cases... no guidance for \"no appeal on file\"...","Adding branch 4: no appeal on file → standard workflow...","Generating corrected article..."],
+bot:"<div class='ml'>Style Guide Applied / Changes Documented</div><div class='mb'><b>FCS Writing Style Guide v1.0 validation:</b><br><br><span class='pill grn'>&#10003; GRADE 7</span> Reading level reduced from 10.4 to 7.1<br><span class='pill grn'>&#10003; STRUCTURE</span> Paragraph → decision tree (4 branches, 1 path each)<br><span class='pill grn'>&#10003; ACTION</span> Every branch ends with a specific action<br><span class='pill grn'>&#10003; SCANNABLE</span> Tested at 22 seconds to find and act<br><span class='pill grn'>&#10003; ESL SAFE</span> No idioms, passive voice removed, pronouns clarified<br><span class='pill grn'>&#10003; EDGE CASES</span> Added missing \"no appeal on file\" branch</div><div class='mb'><b>Changes and rationale:</b><br><br><b>1. Removed sub-bullet link to \"Denylist Appeal was Rejected.\"</b><br>This link routed advocates back into the general appeal workflow, directly contradicting the primary instruction. Source of the conflict.<br><br><b>2. Restructured as decision tree.</b><br>Original: dense paragraph with embedded link. New: each scenario has exactly one path with one action. No interpretation required.<br><br><b>3. Simplified language from Grade 10.4 to Grade 7.1.</b><br>\"Regulator shows it is Completed\" → \"appeal status shows Completed\"<br>\"file another appeal on their behalf\" → \"do not file another appeal\"<br>3 passive constructions → active voice<br><br><b>4. Added missing edge case.</b><br>No guidance existed for when no appeal is on file. Added branch 4.</div>"},
+{think:["Generating corrected article artifact...","Formatting as KA-ready output...","Applying Contentful template structure...","Running final readability score: 7.1 ✓"],
+bot:"<div class='ml'>Generated Artifact: Corrected Article</div><div class='artifact'><div class='artifact-head'><span class='af-icon'>📄</span><span class='af-name'>KA Risk-Denylisted Customers - Step 2 (Corrected)</span><span class='af-type'>KNOWLEDGE ARTICLE</span></div><div class='artifact-body'><b>Step 2: Customer contacts about their appeal</b><br><br>If a customer contacts you about their appeal:<br><br><b>1. Check the appeal status.</b><br><br><b>2. If the appeal status is Completed and the account is still denylisted:</b><br>&nbsp;&nbsp;→ Use response: Cash App {Denylisted - Denied Appeal}<br>&nbsp;&nbsp;→ <b>Do not file another appeal.</b><br>&nbsp;&nbsp;→ If the customer pushes back: acknowledge their frustration, confirm the decision is final, and offer to help with anything else they need.<br><br><b>3. If the appeal status is Pending:</b><br>&nbsp;&nbsp;→ Let the customer know their appeal is still being reviewed.<br>&nbsp;&nbsp;→ No action is needed from you.<br><br><b>4. If there is no appeal on file:</b><br>&nbsp;&nbsp;→ Follow the standard denylisted appeal workflow to submit one.</div></div><div class='approve'>Recommendation ready for PPA review. Accept, modify, or reject before proceeding.</div>"},
+{think:["PPA accepted the corrected article.","Running final validation against FCS Content Framework...","Checking structure compliance... PASS","Checking readability score... 7.1 PASS","Checking compliance flag triggers... NONE","Checking terminology against FCS glossary... PASS","Checking ESL readability markers... PASS","Checking Contentful template compatibility... PASS","All 6 validation checks passed."],
+bot:"<div class='ml'>Final Validation / All Checks Passed</div><div class='mb'><span class='pill grn'>PASS</span> Structure: decision tree, 4 branches, 1 action per branch<br><span class='pill grn'>PASS</span> Readability: Grade 7.1 (target: ≤8.0)<br><span class='pill grn'>PASS</span> Compliance flags: none triggered<br><span class='pill grn'>PASS</span> Terminology: consistent with FCS glossary<br><span class='pill grn'>PASS</span> ESL readability: confirmed safe<br><span class='pill grn'>PASS</span> Contentful template: compatible</div>Article is validated and ready to publish."},
+{think:["Generating deployment plan...","Checking CCO NewsFeed availability for Frontline CX...","Building change communication draft...","Setting up impact tracking milestones...","Calculating measurement timeline based on contact volume (~2,400/month)...","Generating Blockcell deployment package..."],
+bot:"<div class='ml'>Deployment Plan</div><div class='artifact'><div class='artifact-head'><span class='af-icon'>🚀</span><span class='af-name'>Deployment: KA Risk-Denylisted Step 2 Fix</span><span class='af-type'>DEPLOYMENT PLAN</span></div><div class='artifact-body'><b>Publish</b><br>Push corrected article to Contentful. Update syncs to Copilot automatically through content ingestion pipeline.<br><br><b>Change Communication</b><br>Push via CCO NewsFeed (self-serve):<br>• Title: \"Updated: Denylisted Appeal Workflow - Step 2 Conflict Resolved\"<br>• Summary: conflicting instructions removed, clear decision tree added<br>• Include before/after comparison<br>• Flag in next team huddle + Slack digest<br><br><b>Impact Measurement</b><br>• <b>Week 1:</b> Monitor Project FixIt for repeat flags on this article<br>• <b>Week 2:</b> QA sample 50 denylisted contacts for correct workflow execution<br>• <b>Week 4:</b> Compare pre/post defect rate (baseline: Q4 QA data, 3 related defects)<br>• <b>Ongoing:</b> If flags resurface, escalate and iterate</div></div><br><b>Total time from signal to publish: hours.</b> This issue sat in a 21-day content queue under the current model. Under this model, frontline identified it, the agent recommended a fix, PPA approved, and it's live within the same working day."}
+];
+
+let ci=0;
+function rc(){if(ci>=cSteps.length){document.getElementById('cb').disabled=true;return}
+const chat=document.getElementById('cc'),s=cSteps[ci];
+if(s.usr){chat.innerHTML+='<div class="m usr" style="background:rgba(255,77,141,0.06);color:var(--pk)">'+s.usr+'</div>';chat.scrollTop=chat.scrollHeight}
+setTimeout(()=>{if(s.think){addThinking(chat,s.think,()=>{chat.innerHTML+='<div class="m bot">'+s.bot+'</div>';chat.scrollTop=chat.scrollHeight;ci++;upPips('cpips',ci);updateArtifactPanel('c',ci);updateAuditPanel('c',ci);document.getElementById('cs').textContent='Step '+Math.min(ci+1,8)+' of 8';if(ci>=cSteps.length){document.getElementById('cb').textContent='Complete';document.getElementById('cb').disabled=true;document.getElementById('cs').textContent='Complete'}})}
+else{chat.innerHTML+='<div class="m bot">'+s.bot+'</div>';chat.scrollTop=chat.scrollHeight;ci++;upPips('cpips',ci);updateArtifactPanel('c',ci);updateAuditPanel('c',ci);document.getElementById('cs').textContent='Step '+Math.min(ci+1,8)+' of 8';if(ci>=cSteps.length){document.getElementById('cb').textContent='Complete';document.getElementById('cb').disabled=true;document.getElementById('cs').textContent='Complete'}}},s.usr?800:200);chat.scrollTop=chat.scrollHeight}
+
+// TRAINING AGENT - no tier references
+const tSteps=[
+{usr:"Advocates are mistagging complaints primary issue types. Wrong tags feed into regulatory reporting. Multiple sites, not just one.",
+think:["Checking compliance implications of incorrect primary issue tagging...","Regulatory impact: incorrect tags affect CFPB reporting accuracy...","Querying performance data: complaints volume across sites...","Checking existing training coverage: onboarding module only, no refresher...","Flagging as compliance-adjacent performance gap..."],
+bot:"<div class='ml'>Intake / Discovery</div>That has compliance implications. Incorrect primary issue tags affect regulatory reporting accuracy. Before I recommend anything, I need to understand the full scope:<br><br><b>1.</b> How long has this been going on? Weeks, months?<br><b>2.</b> Specific complaint categories or across all complaint types?<br><b>3.</b> Newer advocates, experienced ones, or both?<br><b>4.</b> What training have advocates received on this? When was the last refresher?<br><b>5.</b> Are there specific tag pairs that account for most errors?"},
+{usr:"At least a few weeks, maybe longer. Mostly the nuanced categories where two tags look similar. Both new and experienced. Only got it during onboarding, nothing since. Most confusion is billing disputes vs unauthorized, and service complaints vs product complaints.",
+think:["Analyzing gap indicators...","New + experienced advocates affected → NOT knowledge-only gap...","If knowledge-only, experienced advocates would not struggle...","Experienced advocates mistagging under pressure → skill component confirmed...","Classifying: KNOWLEDGE + SKILL HYBRID...","Mapping to modality framework:","  Knowledge component → REINFORCE","  Skill component → PRACTICE (simulation)","Checking active change volume: 2 deployments in last 30 days → capacity available...","Generating modality recommendation..."],
+bot:"<div class='ml'>Gap Analysis + Modality Recommendation</div><div class='mb'><b>Gap Classification</b><br><br><b>Type:</b> Knowledge + skill hybrid<br><b>Compliance element:</b> Yes (affects CFPB regulatory reporting)<br><b>Scope:</b> Multi-site, all tenure levels, ongoing<br><br><b>Knowledge component</b> → <span class='pill grn'>REINFORCE</span><br>Advocates don't clearly understand the distinctions between similar complaint categories (billing dispute vs unauthorized, service vs product). Recall and comprehension issue addressable with targeted reinforcement.<br><br><b>Skill component</b> → <span class='pill yl'>PRACTICE / SIMULATION</span><br>Even when advocates know the categories conceptually, applying the correct tag under real-time conversation pressure is inconsistent. Requires practiced application, not more content.</div>I want to push back on treating this as purely a knowledge problem. If it were, only new hires would struggle. Experienced advocates are also mistagging, which tells me there's a skill component: they may understand the taxonomy but can't reliably apply it while managing a live conversation.<br><br><b>Two different problems need two different modalities.</b> The skill gap is ultimately a performance issue that partners need to own closing.<br><div class='approve'>Modality recommendation ready for PPA review. Accept or adjust the pairing before I build the solution.</div>"},
+{think:["PPA accepted modality pairing.","Querying co-built library for complaints-related artifacts...","Found: 3 complaint taxonomy templates, 2 microlearning frameworks, 1 quiz scaffold...","Selecting components for reinforcement pack:","  → Quick reference card template (complaints taxonomy v2)","  → Microlearning shell (3-minute visual walkthrough)","  → Self-assessment quiz scaffold (scenario-based, 5 questions)","Customizing for top confusion pairs: billing/unauthorized, service/product...","Pulling real interaction data for scenario examples..."],
+bot:"<div class='ml'>Solution Design / Building from Co-Built Library</div><div class='mb'><b>Reinforcement Pack</b> <span class='pill grn'>REINFORCE</span><br>Built from the co-built library. 3 components selected and customized:<br><br><b>1. Quick Reference Card</b> (Template: Complaints Taxonomy v2)<br>Customized: top 8 primary issue tags with 3 most confused pairs highlighted<br><br><b>2. Microlearning Module / 3 min</b> (Template: Visual Walkthrough Shell)<br>Customized: real mistagging examples with compliance impact<br><br><b>3. Self-Assessment Quiz / 5 scenarios</b> (Template: Scenario-Based Assessment)<br>Customized: real complaint descriptions from interaction data</div><div class='mb'><b>Practice Simulation</b> <span class='pill yl'>PRACTICE</span><br><br>Frontline provides requirements spec with 3-5 real complaint scenarios. L&D builds the simulation using tools across the learning tech stack. Partner delivers and ensures advocates reach proficiency.</div>Let me generate the reinforcement artifacts for your review:"},
+{think:["Generating Quick Reference Card...","Pulling complaint taxonomy data from FCS knowledge base...","Formatting top 8 tags with decision logic...","Highlighting confusion pairs with visual differentiators...","Applying advocate readability standards (Grade 7)..."],
+bot:"<div class='ml'>Generated Artifact: Quick Reference Card</div><div class='artifact'><div class='artifact-head'><span class='af-icon'>📋</span><span class='af-name'>Complaints Primary Issue Tag Guide</span><span class='af-type'>QUICK REFERENCE CARD</span></div><div class='artifact-body'><b>When in doubt, ask: \"What is the customer actually asking us to do?\"</b><br><br><b>🔴 Most confused pairs:</b><br><br><b>Service complaint vs Product complaint</b><br>→ <b>Service</b> = how we treated them (long wait, rude interaction, broken promise)<br>→ <b>Product</b> = what went wrong with a feature or function (app crash, failed transfer, card decline)<br><br><b>Billing dispute vs Unauthorized transaction</b><br>→ <b>Billing</b> = customer recognizes the charge but disagrees with the amount or frequency<br>→ <b>Unauthorized</b> = customer does not recognize the charge at all<br><br><b>Feedback vs Complaint</b><br>→ <b>Feedback</b> = customer is sharing an opinion, no resolution requested<br>→ <b>Complaint</b> = customer wants something fixed, addressed, or resolved<br><br><em>Full card includes all 8 primary issue tags with decision logic and examples.</em></div></div>"},
+{think:["Generating Microlearning Module...","Building slide-by-slide outline from Visual Walkthrough Shell...","Pulling 3 real mistagging examples from QA data...","Adding compliance impact callouts...","Generating Self-Assessment Quiz...","Writing 5 scenario-based questions from real interaction data...","Calculating answer explanations with taxonomy reasoning..."],
+bot:"<div class='ml'>Generated Artifacts: Microlearning + Quiz</div><div class='artifact'><div class='artifact-head'><span class='af-icon'>🎓</span><span class='af-name'>Complaints Tagging: Get It Right</span><span class='af-type'>MICROLEARNING / 3 MIN</span></div><div class='artifact-body'><b>Slide 1:</b> \"Tagging matters. Here's why.\" (30 sec on CFPB reporting implications)<br><b>Slides 2-4:</b> 3 real mistagging examples. Each shows: wrong tag, right tag, why it matters, what could happen if reported incorrectly.<br><b>Slide 5:</b> The 3 confusion pairs with color-coded decision logic.<br><b>Slide 6:</b> \"When you're not sure\" — 10-second decision prompt for real time use.</div></div><div class='artifact'><div class='artifact-head'><span class='af-icon'>✅</span><span class='af-name'>Complaints Tagging Self-Assessment</span><span class='af-type'>QUIZ / 5 SCENARIOS</span></div><div class='artifact-body'><b>Example question:</b><br><br><em>\"A customer calls and says they were charged twice for a Cash App Card purchase at a restaurant. They want their money back. Which primary issue tag applies?\"</em><br><br>A) Service complaint &nbsp; B) Billing dispute &nbsp; C) Unauthorized transaction &nbsp; D) Product complaint<br><br><b>Answer: B (Billing dispute).</b><br>Customer recognizes the charge (they made the purchase) but disputes the amount (charged twice). Not unauthorized (they know the merchant). Not product (card functioned correctly). Not service (no complaint about how they were treated).<br><br><em>4 additional scenarios cover remaining confusion pairs with detailed reasoning.</em></div></div><div class='approve'>Artifacts ready for PPA review. Accept, modify, or request changes before deployment.</div>"},
+{think:["PPA accepted all artifacts.","Generating deployment plan...","Checking Block Academy enrollment workflow...","Calculating advocate population for complaints-handling teams...","Building practice simulation requirements spec template...","Setting measurement milestones based on ~2,400 complaints contacts/month...","Checking change pacing: 2 active deployments + this = 3, within threshold..."],
+bot:"<div class='ml'>Deployment Plan</div><div class='artifact'><div class='artifact-head'><span class='af-icon'>🚀</span><span class='af-name'>Complaints Tagging Deployment</span><span class='af-type'>DEPLOYMENT PLAN</span></div><div class='artifact-body'><b>Reinforcement Pack</b> <span class='pill grn'>DEPLOY NOW</span><br>• Frontline builds from co-built library and AI tools<br>• L&D publishes to <b>Block Academy</b><br>• Enroll all advocates handling complaints across all sites<br>• Push notification: Slack digest + team huddles<br><br><b>Practice Simulation</b> <span class='pill yl'>BUILD THIS WEEK</span><br>• Frontline completes requirements template with 3-5 real complaint scenarios<br>• L&D builds simulation (7-10 days)<br>• Partner receives learning outcomes and MVP<br>• Partner accountable for advocate proficiency post-deployment<br><br><b>Change Pacing Check</b> <span class='pill bl'>CLEAR</span><br>• Active deployments this cycle: 2 (+ this = 3)<br>• Threshold: 4 concurrent deployments<br>• Status: within safe range for advocate cognitive load<br><br><b>Impact Measurement</b><br>• <b>Week 1-2:</b> QA sampling on tagging accuracy vs pre-intervention baseline<br>• <b>Week 2:</b> Block Academy quiz completion rates and average scores<br>• <b>Week 3-4:</b> Compare tagging accuracy pre vs post (target: ≥15% improvement)<br>• <b>Ongoing:</b> If reinforcement alone doesn't move the needle, practice simulation is the escalation<br>• <b>Partner scorecards:</b> Tagging accuracy becomes a tracked performance metric</div></div><b>Current model: 98-day average resolution.</b><br>This model: reinforcement deployed same day via Block Academy. Practice simulation built in 7-10 days. Measured in weeks. Results feed back into quality signals."}
+];
+
+let li=0;
+function rl(){if(li>=tSteps.length){document.getElementById('lb').disabled=true;return}
+const chat=document.getElementById('lc'),s=tSteps[li];
+if(s.usr){chat.innerHTML+='<div class="m usr" style="background:rgba(251,191,36,0.06);color:var(--yl)">'+s.usr+'</div>';chat.scrollTop=chat.scrollHeight}
+setTimeout(()=>{if(s.think){addThinking(chat,s.think,()=>{chat.innerHTML+='<div class="m bot">'+s.bot+'</div>';chat.scrollTop=chat.scrollHeight;li++;upPips('lpips',li);updateArtifactPanel('l',li);updateAuditPanel('l',li);document.getElementById('ls').textContent='Step '+Math.min(li+1,8)+' of 8';if(li>=tSteps.length){document.getElementById('lb').textContent='Complete';document.getElementById('lb').disabled=true;document.getElementById('ls').textContent='Complete'}})}
+else{chat.innerHTML+='<div class="m bot">'+s.bot+'</div>';chat.scrollTop=chat.scrollHeight;li++;upPips('lpips',li);updateArtifactPanel('l',li);updateAuditPanel('l',li);document.getElementById('ls').textContent='Step '+Math.min(li+1,8)+' of 8';if(li>=tSteps.length){document.getElementById('lb').textContent='Complete';document.getElementById('lb').disabled=true;document.getElementById('ls').textContent='Complete'}}},s.usr?800:200);chat.scrollTop=chat.scrollHeight}
+
+</script>
+</html>
